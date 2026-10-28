@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agbalumo&family=Iosevka+Charon&display=swap" rel="stylesheet">
+    
+
+
+    <link rel="stylesheet" href="stylesheet.css">
+    <title>Home</title>
+</head>
+<body>
+
+
+     <!-- nav bar -->
+<nav>
+     <div class="navbar">
+        <a class="nav-brand" href="index.html">
+            <img src="images/Paw_Print logo digi 2026.png" alt="Paw Print logo"
+            width="100" height="100">
+            
+        </a>
+
+        <div> 
+            <h1>Love your animals</h1>
+        </div>
+        
+        <ul class="nav">
+            
+            <li class="nav-item">
+                <a class="nav-link active" href="index.html">Home</a>
+            </li>      <li class="nav-item">
+                <a class="nav-link" href="issues.html">Issues</a>
+            </li>      <li class="nav-item">
+                <a class="nav-link" href="resources.html">Resources</a>
+            </li>
+        </ul>
+       
+
+     </div>    
+</nav>
+
+     <!-- heading image/banner -->
+    <section>
+        <div class="container-centered banner-home">
+            <div class="banner-text">
+                <h1>Love your animals</h1>
+            </div>
+        </div>
+     </section>
+    
+   
+
+     <!--columns content-->
+<!-- NEED TO CREATE IMAGE SLIDER HERE -->
+     <section>
+
+             <div class="slider-image-box">
+            <h2>Healthy Weight vs Overweight Dog</h2>
+            
+            <div class="comparison-container" id="comparisonSlider">
+                <!-- Underlay Image: Overweight Dog -->
+                <img src="images/before-and-after-dog.png" 
+                     alt="Overweight dog" 
+                     class="comparison-img"
+                     onerror="this.src='https://placehold.co/600x400/8b0000/ffffff?text=Overweight+Dog'">
+                <span class="badge badge-right">Overweight</span>
+
+                <!-- Overlay Image Container: Healthy Dog -->
+                <div class="img-overlay" id="imgOverlay">
+                    <img id="overlayImg" 
+                         src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=800&q=80" 
+                         alt="Healthy weight dog"
+                         onerror="this.src='https://placehold.co/600x400/1e3f20/ffffff?text=Healthy+Dog'">
+                    <span class="badge badge-left">Healthy Weight</span>
+                </div>
+
+                <!-- Slider Drag Handle -->
+                <div class="slider-handle" id="sliderHandle">
+                    <div class="slider-button">
+                        &#10094;&#10095;
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slider-image-box">
+            <h2>This is what a healthy weight dog looks like vs a overweight dog</h2>
+            <div class="dog-image">
+                <img src="images/before-and-after-dog.png" alt="before-and-after-dog" width="300" height="200">
+            </div>
+        </div>
+
+       
+            <div>
+                <img class="strip-of-paw"
+                    src="images/Strip-of-paw-prints.png"
+                    alt="Strip-of-paw-prints">
+            </div>
+
+        <div class="row">
+            <div class="col-text">
+                    <h3>Feeding and exercising</h3>
+                    <p>
+                        Pet care is more than just providing your pet with food and a home. Overfeeding, underfeeding, and a lack of exercise are some of the most common mistakes made. If you want to learn more go to our issues page.
+                    </p>
+            </div>
+                <div class="col-link">         <a href="issues.html">Issues</a> 
+                </div>
+        </div>
+
+            <div>
+                <img class="strip-of-paw"
+                    src="images/Strip-of-paw-prints.png"
+                    alt="Strip-of-paw-prints">
+            </div>
+
+
+                    <div class="row">
+            <div class="col-text">
+                     <h3>Resources and Advice</h3>
+                    <p>
+                        Most health issues in pets occur because of overfeeding, underfeeding, or a lack of exercise and can be corrected with a few simple changes to your pet’s daily routine. if you want to learn more go to our resources page.
+                    </p>
+            </div>
+
+            <div class="col-link">         <a href="resources.html">Resources</a> 
+                </div>
+        </div>
+
+
+     </section>
+
+    
+
+     <!--footer-->
+     <footer>
+        <div class="footer">
+            <h2>Love your animals</h2>
+            <p>Illustrations from <a href="https://www.magnific.com/freepik#from_element=topbar_banner">magnific</a></p>
+        </div>
+        
+     </footer>
+    
+
+       <!-- Interactive Image Slider JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('comparisonSlider');
+            const overlay = document.getElementById('imgOverlay');
+            const overlayImg = document.getElementById('overlayImg');
+            const handle = document.getElementById('sliderHandle');
+            
+            let isDragging = false;
+
+            // Maintain overlay image width equal to container width so image doesn't distort
+            function updateImageWidth() {
+                overlayImg.style.width = container.offsetWidth + 'px';
+            }
+
+            window.addEventListener('resize', updateImageWidth);
+            updateImageWidth();
+
+            function setPosition(xPos) {
+                const rect = container.getBoundingClientRect();
+                let x = xPos - rect.left;
+
+                // Clamp values within container boundaries
+                if (x < 0) x = 0;
+                if (x > rect.width) x = rect.width;
+
+                const percentage = (x / rect.width) * 100;
+                overlay.style.width = percentage + '%';
+                handle.style.left = percentage + '%';
+            }
+
+            // Mouse Events
+            container.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                setPosition(e.clientX);
+            });
+
+            window.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                setPosition(e.clientX);
+            });
+
+            // Touch Events (For Mobile/Tablets)
+            container.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                setPosition(e.touches[0].clientX);
+            });
+
+            window.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+
+            window.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                setPosition(e.touches[0].clientX);
+            });
+        });
+    </script>
+
+
+</body>
+</html>
